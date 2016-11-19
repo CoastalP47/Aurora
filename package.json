@@ -7,7 +7,7 @@
     "aurora": "./hello.js"
   },
   "scripts": {
-    "hello" : "./hello.js"
+    "hello": "./hello.js"
   },
   "author": "Pat Eason <patrick@pateason.com>",
   "license": "ISC",
@@ -16,8 +16,9 @@
     "commander": "^2.9.0",
     "express": "^4.14.0",
     "handlebars": "^4.0.5",
-    "lodash": "^4.16.6",
-    "mysql": "^2.12.0"
+    "lodash": "^4.17.2",
+    "mysql": "^2.12.0",
+    "require-all": "^2.0.0"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
