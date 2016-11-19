@@ -7,9 +7,10 @@
  * @param string pass
  */
 module.exports = {
-  "driver"  : "mysql",
-  "host"    : "localhost",
-  "port"    : 6060,
-  "user"    : "root",
-  "pass"    : "root"
+  driver    : "mysql",
+  host      : "localhost",
+  port      : 6060,
+  user      : "root",
+  pass      : "root",
+  database  : "aurora"
 };

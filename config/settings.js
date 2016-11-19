@@ -1,6 +1,9 @@
 module.exports = {
   global : {
-    "models"      : true
+    "models" : true
+  },
+  environment: {
+    port: 9046
   },
   models : {
     path : '/models'

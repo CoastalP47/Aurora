@@ -10,12 +10,21 @@ global._ = require('lodash');
 const routes    = require('../config/routes.js');
 const database  = require('../config/database.js');
 const settings  = require('../config/settings.js');
-const Model     = require('./orm/classes/model');
+
 
 /**
- * Create globaL Aurora object
+ * Get Aurora components
+ */
+const orm       = require('./orm/orm');
+const router    = require('./router/router');
+
+/**
+ * Create global Aurora object
  */
 global.Aurora   = {};
+Aurora._settings = settings;
+Aurora._database = database;
+Aurora._routes = routes;
 
 
 module.exports = () => {
@@ -27,29 +36,23 @@ module.exports = () => {
     /**
      * ORM
      */
-    console.log('loading models');
-    let models = require('require-all')(global.root_dir + settings.models.path);
-    Aurora.models = [];
-    _.forEach(models, (v, k) => {
-        Aurora.models[k] = Model.createModel(v, k);
-        if( settings.global.models ){
-            global[k] = Aurora.models[k];
-        }
-    });
-
-    console.log(User);
+    console.log('loading ORM');
+    orm();
 
     let pat = new User({
         first_name  : 'Pat',
         last_name   : 'Eason'
     });
-    console.log( pat );
-    console.log( pat.first_name );
+    console.log(pat);
+    console.log(pat.first_name);
+    pat.first_name = 'Rachel';
+    console.log(pat.first_name);
 
     /**
      * Router
      */
-    console.log('loading routes');
+    console.log('loading router');
+    router();
 
     /**
      * Views
