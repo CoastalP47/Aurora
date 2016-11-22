@@ -1,4 +1,10 @@
 /**
+ * NPM modules
+ */
+const express = require('express');
+const app = express();
+
+/**
  * Globals
  */
 global._ = require('lodash');
@@ -17,6 +23,7 @@ const settings  = require('../config/settings.js');
  */
 const orm       = require('./orm/orm');
 const router    = require('./router/router');
+const views     = require('./views/views');
 
 /**
  * Create global Aurora object
@@ -26,41 +33,31 @@ Aurora._settings = settings;
 Aurora._database = database;
 Aurora._routes = routes;
 
+//set base Express app
+Aurora._app = app;
+
 
 module.exports = () => {
-    /**
-     * Validate Config
-     */
+    //validate config
     require('./validation/startup').validate(database, settings, routes);
 
-    /**
-     * ORM
-     */
+    //configure ORM
     console.log('loading ORM');
     orm();
 
-    let pat = new User({
-        first_name  : 'Pat',
-        last_name   : 'Eason'
-    });
-    console.log(pat);
-    console.log(pat.first_name);
-    pat.first_name = 'Rachel';
-    console.log(pat.first_name);
-
-    /**
-     * Router
-     */
+    //configure router
     console.log('loading router');
     router();
 
-    /**
-     * Views
-     */
+    //configure views
     console.log('configuring views');
+    views();
 
-    /**
-     * Security
-     */
+    //configure security
     console.log('configuring security');
+
+    //start express
+    Aurora._app.listen(Aurora._settings.environment.port, () => {
+        console.log(`Aurora is running on port ${Aurora._settings.environment.port}`)
+    });
 };

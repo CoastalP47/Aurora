@@ -1,7 +1,8 @@
-const mysql = require('mysql');
+const Mysql = require('mysql');
+const Squel = require('squel');
 
 module.exports = {
-    connection : mysql.createConnection({
+    connection : Mysql.createConnection({
         host     : Aurora._database.host,
         user     : Aurora._database.user,
         password : Aurora._database.pass,

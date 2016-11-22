@@ -1,14 +1,27 @@
-const express = require('express');
-const app = express();
+var express = require('express');
 
 module.exports = () => {
-    Aurora._app = app;
+    /**
+     * Load default routes based on loaded models
+     */
 
-    Aurora._app.get('/', (req, res) => {
-        res.send('Hello World!')
+
+    /**
+     * Load all defined controllers into Express App
+     */
+    let controllers = require('require-all')(`${process.cwd()}${(Aurora._settings.controllers.path ? Aurora._settings.controllers.path : '/controllers')}`);
+    _.forEach(controllers, (v, k) => {
+        console.log(`Loading ${k} controller`);
+        var router = express.Router();
+
+        _.forEach(v, function(action, route){
+            router.all(route, action);
+        });
+
+        Aurora._app.use(`/${k}`, router);
     });
 
-    Aurora._app.listen(3000, () => {
-        console.log('Example app listening on port 3000!')
+    Aurora._app.get('/', (req, res) => {
+        res.send('Hello World!');
     });
 };

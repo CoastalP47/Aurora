@@ -1,9 +1,8 @@
 console.log('Aurora is starting');
 
-try {
-    global.root_dir = __dirname;
+try{
     require('./aurora/bootstrap')();
-} catch(err) {
+}catch(err){
     console.error(err);
     process.exit(1);
 }

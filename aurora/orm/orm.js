@@ -2,7 +2,7 @@ const Model     = require('./classes/model');
 
 module.exports = () => {
 
-    let models = require('require-all')(global.root_dir + Aurora._settings.models.path);
+    let models = require('require-all')(`${process.cwd()}${Aurora._settings.models.path ? Aurora._settings.models.path : '/models'}`);
     Aurora.models = [];
 
     /**
