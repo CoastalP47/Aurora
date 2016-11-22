@@ -1,16 +1,15 @@
-module.exports = () => {
-    Aurora._app.use((req, res, next) => {
+module.exports = (req, res, next) => {
+    console.log('triggered view-render middleware');
+
+    var _render = res.render;
+
+    res.render = function( view, options, fn ){
         console.log(req);
-        console.log(res);
+        // do some custom logic
+        _.extend( options, {session: true} );
+        // continue with original render
+        _render.call( this, view, options, fn );
+    };
 
-        var _render = res.render;
-
-        res.render = (view, options, fn) => {
-            console.log(view);
-            console.log(options);
-            console.log(fn);
-        };
-
-        next();
-    });
+    next();
 };

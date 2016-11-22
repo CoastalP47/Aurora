@@ -14,5 +14,5 @@ module.exports = () => {
     Aurora._app.set('views', `${process.cwd()}/views`);
 
     //load middleware
-    require('./middleware/view-render')();
+    Aurora._app.use( require('./middleware/view-render') );
 };

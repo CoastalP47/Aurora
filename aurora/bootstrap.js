@@ -45,13 +45,13 @@ module.exports = () => {
     console.log('loading ORM');
     orm();
 
-    //configure router
-    console.log('loading router');
-    router();
-
     //configure views
     console.log('configuring views');
     views();
+
+    //configure router
+    console.log('loading router');
+    router();
 
     //configure security
     console.log('configuring security');
