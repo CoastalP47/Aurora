@@ -4,11 +4,21 @@ module.exports = (req, res, next) => {
     var _render = res.render;
 
     res.render = function( view, options, fn ){
-        console.log(req);
-        // do some custom logic
-        _.extend( options, {session: true} );
-        // continue with original render
-        _render.call( this, view, options, fn );
+        //get current route
+        let view_dir    = req.baseUrl.replace('/','');
+        let view_path   = `${view_dir}/${view}`;
+
+        //load layout
+        let layout_dir  = Aurora._settings.views.layout;
+        options = options || {};
+        if( options.layout ){
+            options.layout = `${layout_dir}/${options.layout}`;
+        }else{
+            _.extend( options, {layout: `${layout_dir}/default`} );
+        }
+
+        //continue with route
+        _render.call( this, view_path, options, fn );
     };
 
     next();

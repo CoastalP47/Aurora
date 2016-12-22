@@ -7,7 +7,8 @@
     "aurora": "./hello.js"
   },
   "scripts": {
-    "hello": "./hello.js"
+    "hello": "node hello.js",
+    "test": "node test.js"
   },
   "author": "Pat Eason <patrick@pateason.com>",
   "license": "ISC",

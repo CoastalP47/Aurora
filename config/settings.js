@@ -13,7 +13,8 @@ module.exports = {
   },
   views : {
     engine    : 'handlebars',
-    path      : '/views',
-    partials  : '/views/partials'
+    path      : 'views',
+    partials  : 'views/partials',
+    layout    : 'layout'
   }
 };
