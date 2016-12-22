@@ -12,9 +12,9 @@ module.exports = (req, res, next) => {
         let layout_dir  = Aurora._settings.views.layout;
         options = options || {};
         if( options.layout ){
-            options.layout = `${layout_dir}/${options.layout}`;
+            options.layout = `${process.cwd()}${layout_dir}/${options.layout}`;
         }else{
-            _.extend( options, {layout: `${layout_dir}/default`} );
+            _.extend( options, {layout: `${process.cwd()}${layout_dir}/default`} );
         }
 
         //continue with route

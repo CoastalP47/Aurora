@@ -1,4 +1,6 @@
 module.exports = {
+  name: 'Aurora',
+  title_format : '{title} | {site_name}',
   global : {
     "models" : true
   },
@@ -13,8 +15,8 @@ module.exports = {
   },
   views : {
     engine    : 'handlebars',
-    path      : 'views',
-    partials  : 'views/partials',
-    layout    : 'layout'
+    path      : '/views',
+    partials  : '/views/partials',
+    layout    : '/views/layout'
   }
 };

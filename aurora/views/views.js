@@ -8,11 +8,14 @@ module.exports = () => {
     //set view engine
     // Aurora._app.set('view engine', Aurora._settings.views.engine);
     Aurora._app.engine('hbs', hbs.express4({
-        partialsDir: `${process.cwd()}/${Aurora._settings.views.partials}`
+        partialsDir: `${process.cwd()}${Aurora._settings.views.partials}`
     }));
     Aurora._app.set('view engine', 'hbs');
-    Aurora._app.set('views', `${process.cwd()}/${Aurora._settings.views.path}`);
+    Aurora._app.set('views', `${process.cwd()}${Aurora._settings.views.path}`);
 
     //load middleware
     Aurora._app.use( require('./middleware/view-render') );
+
+    //load helpers
+    require('require-all')(`${__dirname}/helpers`);
 };
