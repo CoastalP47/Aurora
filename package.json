@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Lightweight MVC for getting applications running quickly and easily",
   "main": "app.js",
+  "engines":{
+    "node": "^6.9.0"
+  },
   "bin": {
     "aurora": "./hello.js"
   },
