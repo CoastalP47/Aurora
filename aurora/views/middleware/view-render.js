@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
 
     res.render = function( view, options, fn ){
         //get current route
-        let view_dir    = req.baseUrl.replace('/','');
+        let view_dir    = req.baseUrl ? req.baseUrl.replace('/','') : Aurora._routes.default_route.controller;
         let view_path   = `${view_dir}/${view}`;
 
         //load layout
