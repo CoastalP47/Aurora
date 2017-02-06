@@ -7,5 +7,8 @@ module.exports = {
         last_name : {
             type : 'string'
         }
+    },
+    full_name : () =>{
+        return this.first_name + this.last_name;
     }
 };

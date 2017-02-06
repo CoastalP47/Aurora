@@ -17,6 +17,13 @@ const routes    = require('../config/routes.js');
 const database  = require('../config/database.js');
 const settings  = require('../config/settings.js');
 
+/**
+ * Create global Aurora object
+ */
+global.Aurora    = {};
+Aurora._settings = settings;
+Aurora._database = database;
+Aurora._routes   = routes;
 
 /**
  * Get Aurora components
@@ -24,14 +31,6 @@ const settings  = require('../config/settings.js');
 const orm       = require('./orm/orm');
 const router    = require('./router/router');
 const views     = require('./views/views');
-
-/**
- * Create global Aurora object
- */
-global.Aurora   = {};
-Aurora._settings = settings;
-Aurora._database = database;
-Aurora._routes = routes;
 
 //set base Express app
 Aurora._app = app;

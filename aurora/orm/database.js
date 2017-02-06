@@ -1,7 +1,7 @@
 const Mysql = require('mysql');
 const Squel = require('squel');
 
-module.exports = {
+let database = {
     connection : Mysql.createConnection({
         host     : Aurora._database.host,
         user     : Aurora._database.user,
@@ -10,41 +10,73 @@ module.exports = {
     }),
 
     connect : () => {
-        this.connection.connect();
+        database.connection.connect();
     },
 
     disconnect : () => {
-        this.connection.end();
+        database.connection.end();
     },
+};
+
+module.exports = {
 
     find : (table, query) => {
-        this.connect();
-        //query here
-        this.disconnect();
+        database.connect();
+
+        let sql = Squel.select()
+                       .from(table);
+
+        if(query){
+            sql.where(query);
+        }
+
+        database.connection.query(
+            sql.toString(),
+            function(error, results, fields){
+                if(error) throw error;
+
+                return results;
+             });
+
+        database.disconnect();
     },
 
     findOne : (table, id) => {
-        this.connect();
-        //query here
-        this.disconnect();
+        database.connect();
+
+        let sql = Squel.select()
+            .from(table)
+            .where('id = ?', id)
+            .limit(1);
+
+
+        database.connection.query(
+            sql.toString(),
+            function(error, results, fields){
+                if(error) throw error;
+
+                return results;
+            });
+
+        database.disconnect();
     },
 
     insert : (table, data) => {
-        this.connect();
+        database.connect();
         //query here
-        this.disconnect();
+        database.disconnect();
     },
 
     update: (table, data) => {
-        this.connect();
+        database.connect();
         //query here
-        this.disconnect();
+        database.disconnect();
     },
 
     delete : (table, data) => {
-        this.connect();
+        database.connect();
         //query here
-        this.disconnect();
+        database.disconnect();
     }
 
 };
